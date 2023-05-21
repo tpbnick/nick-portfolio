@@ -188,7 +188,7 @@ const Databox = () => {
 
 	const contactData = (
 		<div className="flex justify-center text-white mx-auto max-w-4xl">
-			<form name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" className="mx-auto mb-5 w-full md:w-3/4 lg:w-1/2">
+			<form name="contact-nick" method="POST" data-netlify="true" data-netlify-recaptcha="true" className="mx-auto mb-5 w-full md:w-3/4 lg:w-1/2">
 				<div className="space-y-4">
 					<div className="flex justify-between items-center">
 						<label htmlFor="name" className="text-left pr-4">
