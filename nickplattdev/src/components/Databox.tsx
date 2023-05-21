@@ -188,11 +188,6 @@ const Databox = () => {
 
 	const contactData = (
 		<div className="flex justify-center text-white mx-auto max-w-4xl">
-			<form name="contact" netlify-honeypot="bot-field" hidden>
-				<input type="text" name="name" />
-				<input type="email" name="email" />
-				<textarea name="message"></textarea>
-			</form>
 			<form name="contact-nick" method="POST" data-netlify="true" data-netlify-recaptcha="true" className="mx-auto mb-5 w-full md:w-3/4 lg:w-1/2">
 				<div className="space-y-4">
 					<div className="flex justify-between items-center">
@@ -203,7 +198,7 @@ const Databox = () => {
 							<input type="text" id="name" placeholder="Your name..." name="name" className="input bg-atom1 w-full" />
 						</div>
 					</div>
-					<input type="hidden" name="form-name" value="contact" />
+					<input type="hidden" name="form-name" value="contact-nick" />
 					<div className="flex justify-between items-center">
 						<label htmlFor="email" className="text-left pr-4">
 							Your Email:
