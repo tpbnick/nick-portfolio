@@ -198,7 +198,6 @@ const Databox = () => {
 							<input type="text" id="name" placeholder="Your name..." name="name" className="input bg-atom1 w-full" />
 						</div>
 					</div>
-					<input type="hidden" name="form-name" value="contact-nick" />
 					<div className="flex justify-between items-center">
 						<label htmlFor="email" className="text-left pr-4">
 							Your Email:
