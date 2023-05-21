@@ -1,8 +1,10 @@
+import NickAtom from "../assets/atom.png";
+
 const Nickdata = () => {
 	return (
 		<div className="w-90 mx-auto sm:w-full md:w-4/5 lg:w-3/4 xl:w-2/3 pt-3">
 			<a href={window.location.href}>
-				<img src="/src/assets/atom.png" style={{ width: "10%", height: "auto" }} className="mx-auto NickInfo fade-in" alt="Atom" />
+				<img src={NickAtom} style={{ width: "10%", height: "auto" }} className="mx-auto NickInfo fade-in" alt="Atom" />
 			</a>
 			<p className="text-white text-2xl pt-5 pb-2">Nicholas Platt</p>
 			<p className="text-white text-l pb-8">
