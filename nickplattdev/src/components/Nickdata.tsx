@@ -1,10 +1,10 @@
-import NickAtom from "../assets/atom.png";
+import NickAtom from "../assets/atom.webp";
 
 const Nickdata = () => {
 	return (
 		<div className="w-90 mx-auto sm:w-full md:w-4/5 lg:w-3/4 xl:w-2/3 pt-3">
 			<a href={window.location.href}>
-				<img src={NickAtom} className="mx-auto fade-in transition-transform duration-300 transform-gpu hover:scale-110" style={{ width: "10%", height: "auto" }} alt="Logo" />
+				<img src={NickAtom} className="mx-auto fade-in transition-transform duration-300 transform-gpu hover:scale-110" style={{ width: "10%", height: "auto" }} width="100" height="100" alt="Logo" />
 			</a>
 			<p className="text-white text-2xl pt-5 pb-2">Nicholas Platt</p>
 			<p className="text-white text-l pb-8">

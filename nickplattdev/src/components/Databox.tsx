@@ -2,13 +2,13 @@ import { useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 
-import Image1 from "../assets/nicklyss.png";
-import Image2 from "../assets/alaska.png";
-import Image3 from "../assets/pup.png";
-import SoccerfrontImg from "../assets/soccerfront.png";
-import UnbinImg from "../assets/unbin.png";
-import DocsImg from "../assets/docs.png";
-import PortfolioImg from "../assets/portfolio.png";
+import Image1 from "../assets/nicklyss.webp";
+import Image2 from "../assets/alaska.webp";
+import Image3 from "../assets/pup.webp";
+import SoccerfrontImg from "../assets/soccerfront.webp";
+import UnbinImg from "../assets/unbin.webp";
+import DocsImg from "../assets/docs.webp";
+import PortfolioImg from "../assets/portfolio.webp";
 
 type ItemType = {
 	name: string;
@@ -40,7 +40,7 @@ const Databox = () => {
 					<div className="photo-gallery flex">
 						{images.map((image, index) => (
 							<PhotoView key={index} src={image.src}>
-								<div className="max-h-6 pt-3 px-3 mx-auto">
+								<div className="max-h-6 pt-3 pb-10 px-3 mx-auto">
 									<img src={image.src} alt={image.alt} className="rounded-lg" />
 								</div>
 							</PhotoView>
