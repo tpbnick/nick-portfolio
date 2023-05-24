@@ -330,12 +330,12 @@ const Databox = () => {
 				} else {
 					setSelectedItem(item);
 				}
-			}, 200);
+			}, 500);
 		}
 	};
 
 	return (
-		<div>
+		<div >
 			<div className="flex justify-around mt-4 py-8">
 				<div className="hidden sm:flex">
 					{/* Buttons displayed as a single line on larger screens */}
@@ -355,7 +355,7 @@ const Databox = () => {
 				</div>
 			</div>
 
-			{selectedItem && <div className={`mx-auto transition-opacity duration-500 ease-in mt-5 pb-20 ${isFading ? "opacity-0" : "opacity-100"}`}>{selectedItem.data}</div>}
+			{selectedItem && <div className={`mx-auto fade-in-out transition-opacity duration-500 ease-in mt-5 pb-20 ${isFading ? "opacity-0" : "opacity-100"}`}>{selectedItem.data}</div>}
 		</div>
 	);
 };
