@@ -6,7 +6,7 @@ const Nickdata = () => {
 			<a href={window.location.href}>
 				<img
 					src={NickAtom}
-					className="mx-auto fade-in transition-transform duration-300 transform-gpu hover:scale-110"
+					className="mx-auto fade-in duration-300 transform-gpu hover:scale-110"
 					style={{ width: "10%", height: "auto" }}
 					width="100"
 					height="100"

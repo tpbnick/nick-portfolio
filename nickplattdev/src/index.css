@@ -23,4 +23,6 @@
 
 .fade-in {
 	animation: fade-in 2s ease;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
 }
