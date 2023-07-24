@@ -37,7 +37,7 @@ const Nickdata = () => {
 				have a great amount of experience in intelligence analysis and national
 				security systems. I was also in the Marine Corps as an ELINT/All Source
 				Analyst! I received my Bachelor's degree in Computer Networking and
-				Cybersecurity in 2018 and my Master's in Software Engineering in 2023, both
+				Cybersecurity in 2020 and my Master's in Software Engineering in 2023, both
 				from the University of Maryland. I enjoy frontend development, especially
 				working with JavaScript and web application frameworks. If you have any
 				questions, please ask!
