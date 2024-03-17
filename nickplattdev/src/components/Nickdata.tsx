@@ -15,7 +15,7 @@ const Nickdata = () => {
 			</a>
 			<p className="text-white text-2xl pt-5 pb-2">Nicholas Platt</p>
 			<p className="text-white text-l pb-8">
-				Glen Burnie, MD 21060 · (909) 293-8750 ·{" "}
+				Rancho Cucamonga, CA 91730 · (909) 293-8750 ·{" "}
 				<a
 					href="mailto:nick@nickplatt.dev"
 					className="text-white hover:text-blue-500"
