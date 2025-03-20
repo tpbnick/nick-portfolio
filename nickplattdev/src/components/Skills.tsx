@@ -20,10 +20,10 @@ const Skills = () => (
 				>
 					documentation website
 				</a>{" "}
-				to better organize them, using Markdown and Material for MKDocs. My notes
-				website can be found . I took Harvard University's CS50x - Introduction to
-				Computer Science during the 2020 pandemic and learned basics for both C,
-				Python, JavaScript, and SQL! For my final project, I developed{" "}
+				to better organize them, using Markdown and Material for MKDocs. I took Harvard 
+				University's CS50x - Introduction to Computer Science during the 2020 pandemic 
+				and learned basics for both C, Python, JavaScript, and SQL! For my final 
+				project, I developed{" "}
 				<a
 					href="https://soccerfront.io"
 					target="_blank"
