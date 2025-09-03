@@ -41,11 +41,119 @@
   color: #888;
 }
 
+/* Fade animations */
 .fade-in-out {
   opacity: 1;
-  transition: opacity 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .fade-in-out.opacity-0 {
   opacity: 0;
+}
+
+/* Image fade-in animation */
+.image-fade-in {
+  opacity: 0;
+  animation: imageFadeIn 0.8s ease-in-out forwards;
+}
+
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Component transition animations */
+.component-fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.component-fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.component-fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.component-fade-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+/* Interactive element transitions */
+button, a, .card {
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Header transition animations */
+.header-bio-transition {
+  transition: all 0.5s ease-out;
+  overflow: hidden;
+}
+
+.header-bio-visible {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 24rem; /* 96 * 0.25rem = 24rem */
+}
+
+.header-bio-hidden {
+  opacity: 0;
+  transform: translateY(-1rem);
+  max-height: 0;
+}
+
+/* Navigation slide animations */
+.nav-slide-up {
+  transform: translateY(-4rem); /* -translate-y-16 = -4rem */
+  transition: all 0.7s ease-out;
+}
+
+.nav-slide-down {
+  transform: translateY(0);
+  transition: all 0.7s ease-out;
+}
+
+/* PDF Viewer animations */
+.pdf-viewer-backdrop {
+  transition: all 0.2s ease-in-out;
+}
+
+.pdf-viewer-backdrop.fade-in {
+  opacity: 1;
+}
+
+.pdf-viewer-backdrop.fade-out {
+  opacity: 0;
+}
+
+.pdf-viewer-modal {
+  transition: all 0.2s ease-in-out;
+  transform-origin: center;
+}
+
+.pdf-viewer-modal.fade-in {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.pdf-viewer-modal.fade-out {
+  opacity: 0;
+  transform: scale(0.95) translateY(1rem);
 }

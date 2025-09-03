@@ -22,7 +22,7 @@ const Skills = () => (
 				</a>{" "}
 				to better organize them, using Markdown and Material for MKDocs. I took Harvard 
 				University's CS50x - Introduction to Computer Science during the 2020 pandemic 
-				and learned basics for both C, Python, JavaScript, and SQL! For my final 
+				and learned basics in C, Python, JavaScript, and SQL! For my final 
 				project, I developed{" "}
 				<a
 					href="https://soccerfront.io"
@@ -32,7 +32,17 @@ const Skills = () => (
 					SoccerFront.io
 				</a>
 				, which is a soccer live scores website built using Nodejs, Expressjs, HTML,
-				CSS, and JS.
+				CSS, and JS. Most recently, I developed{" "}
+				<a
+					href="https://triviadart.com"
+					target="_blank"
+					className="text-blue-300 hover:text-blue-500"
+				>
+					TriviaDart
+				</a>
+				, which has become my newest and proudest application to date. This project 
+				represents a significant milestone in my development journey, showcasing my 
+				growth in full-stack development and user experience design.
 			</p>
 		</div>
 		<div className="mockup-code text-left max-w-xl mx-auto text-sm sm:text-base md:text-lg lg:text-lg">
