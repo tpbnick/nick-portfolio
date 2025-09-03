@@ -14,6 +14,7 @@ const images = [
 
 const About = () => {
 	const [visibleImages, setVisibleImages] = useState<number[]>([]);
+	const [commitInfo, setCommitInfo] = useState<{ hash: string; date: string } | null>(null);
 
 	// Stagger image animations
 	useEffect(() => {
@@ -22,6 +23,34 @@ const About = () => {
 				setVisibleImages(prev => [...prev, index]);
 			}, index * 200); // 200ms delay between each image
 		});
+	}, []);
+
+	// Get commit information
+	useEffect(() => {
+		const commitHash = import.meta.env.VITE_COMMIT_HASH;
+		const buildDate = import.meta.env.VITE_BUILD_DATE;
+		
+		if (commitHash && commitHash !== 'main') {
+			const formattedDate = new Date(buildDate).toLocaleDateString('en-US', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			});
+
+			setCommitInfo({
+				hash: commitHash,
+				date: formattedDate
+			});
+		} else {
+			setCommitInfo({
+				hash: 'dev',
+				date: new Date().toLocaleDateString('en-US', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
+				})
+			});
+		}
 	}, []);
 
 	return (
@@ -33,9 +62,9 @@ const About = () => {
 				both from the University of Maryland. I have working knowledge in Python,
 				TypeScript, HTML, CSS, JavaScript, Java, SQL, and Markdown (hopefully more to come in the
 				near future). Outside of work, I love watching European soccer (Go Bayern!),
-				golfing, surfing, and spending time with my wife and pup. If you have any
-				questions, please feel free to reach out to me through my contact info. 
-				I also created an{" "}
+				building keyboards, and spending time with my wife and pup. If you have any
+				questions, please feel free to reach out to me through the contact info
+				below. I also created an{" "}
 				<a
 					href="https://nicklyss.com"
 					target="_blank"
@@ -66,6 +95,32 @@ const About = () => {
 					</div>
 				</PhotoProvider>
 			</div>
+			
+			{/* Commit Info Section */}
+			{commitInfo && (
+				<div className="text-center mt-8 pt-6 border-t border-gray-600">
+					<p className="text-sm text-gray-400">
+						This portfolio was last updated on {commitInfo.date} -{" "}
+						{commitInfo.hash === 'dev' ? (
+							<span className="text-yellow-400">dev mode</span>
+						) : (
+							<a
+								href={`https://github.com/tpbnick/nick-portfolio/commit/${commitInfo.hash}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-blue-300 hover:text-blue-500 transition-colors duration-200"
+							>
+								{commitInfo.hash.substring(0, 7)}
+							</a>
+						)}
+					</p>
+					{commitInfo.hash === 'dev' && (
+						<p className="text-xs text-gray-500 mt-2">
+							Run <code className="bg-gray-700 px-2 py-1 rounded">npm run build</code> to see commit info
+						</p>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };

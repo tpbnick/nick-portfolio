@@ -121,3 +121,7 @@ temp/
 
 # Local development
 .local/
+
+# Generated environment files
+.env
+.env.local

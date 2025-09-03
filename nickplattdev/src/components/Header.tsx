@@ -8,7 +8,7 @@ interface HeaderProps {
 	isTransitioning: boolean;
 }
 
-const Header = ({ isVisible, isTransitioning }: HeaderProps) => {
+const Header = ({ isVisible }: HeaderProps) => {
 	const [isEntranceVisible, setIsEntranceVisible] = useState<boolean>(false);
 
 	// Entrance animation delay
