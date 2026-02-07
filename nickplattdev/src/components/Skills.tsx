@@ -14,16 +14,16 @@ const Skills = () => (
 			<p className="pb-8">
 				I began taking notes and decided to create a{" "}
 				<a
-					href="https://docs.nicklyss.com"
+					href="https://docs.nickplatt.dev"
 					target="_blank"
 					className="text-blue-300 hover:text-blue-500"
 				>
 					documentation website
 				</a>{" "}
-				to better organize them, using Markdown and Material for MKDocs. I took Harvard 
-				University's CS50x - Introduction to Computer Science during the 2020 pandemic 
-				and learned basics in C, Python, JavaScript, and SQL! For my final 
-				project, I developed{" "}
+				to better organize them, using Markdown and Material for MKDocs. I took
+				Harvard University's CS50x - Introduction to Computer Science during the
+				2020 pandemic and learned basics in C, Python, JavaScript, and SQL! For my
+				final project, I developed{" "}
 				<a
 					href="https://soccerfront.io"
 					target="_blank"
@@ -32,7 +32,8 @@ const Skills = () => (
 					SoccerFront.io
 				</a>
 				, which is a soccer live scores website built using Nodejs, Expressjs, HTML,
-				CSS, and JS. Most recently, I developed{" "}
+				CSS, and JS (This application is archived and no longer active - code is
+				still available on Github). Most recently, I developed{" "}
 				<a
 					href="https://triviadart.com"
 					target="_blank"
@@ -40,8 +41,8 @@ const Skills = () => (
 				>
 					TriviaDart
 				</a>
-				, which has become my newest and proudest application to date. This project 
-				represents a significant milestone in my development journey, showcasing my 
+				, which has become my newest and proudest application to date. This project
+				represents a significant milestone in my development journey, showcasing my
 				growth in full-stack development and user experience design.
 			</p>
 		</div>
