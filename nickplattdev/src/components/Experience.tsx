@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PDFViewer from "./PDFViewer";
-import ResumePDF from "../assets/pdfs/Nicholas Platt Resume 2025.pdf";
+import ResumePDF from "../assets/pdfs/platt_resume_2026_cleared.pdf";
 
 interface Job {
 	id: number;
@@ -17,12 +17,14 @@ const jobs: Job[] = [
 		company: "Erias Ventures",
 		period: "July 2022 - Present",
 		responsibilities: [
-			"Worked within an Agile environment developing web applications using the following technologies: Python, Pytest, TypeScript, React, and Docker.",
-			"Utilized GitHub to manage the version control of different repositories of data.",
-			"Generated integration, unit, and acceptance tests utilizing the Pytest framework.",
-			"Tested new features before release to users to ensure operability and document any issues/bugs.",
-			"Created multiple Sphinx documentation directives to improve automated documentation creation.",
-			"Completed numerous pull request reviews to merge code into multiple codebases."
+			"Developed and maintained full-stack web applications in Agile teams using Python (FastAPI), React/TypeScript, Docker, and AWS, owning features end-to-end from API design to UI implementation.",
+			"Designed and deployed cloud infrastructure on AWS using EC2, S3, ECR, CloudFormation, and Secrets Manager.",
+			"Built and maintained CI/CD pipelines (GitHub, Jenkins), adding automated checks for unit tests and code formatting compliance.",
+			"Designed and executed automated test suites (unit, acceptance, E2E) using Pytest, Jest, and Selenium, maintaining ≥95% coverage.",
+			"Diagnosed and resolved defects through root-cause analysis and debugging, improving system stability and maintainability.",
+			"Managed source control across GitHub and GitLab, performing code reviews and merging pull requests.",
+			"Implemented documentation-as-code practices and maintained developer/user documentation and architecture diagrams using Sphinx, LaTeX, and Markdown.",
+			"Delivered technical briefings and live demonstrations to senior leadership on new features and system capabilities."
 		]
 	},
 	{
@@ -31,30 +33,29 @@ const jobs: Job[] = [
 		company: "Boeing Intelligence & Analytics (BI&A)",
 		period: "May 2021 - July 2022",
 		responsibilities: [
-			"Worked within an Agile environment developing web applications using the following technologies: Java, React, MongoDB, JavaScript, HTML, CSS, and Apache Tomcat/Maven.",
-			"Utilized GitLab to manage different repositories of data.",
-			"Updated API documentation for new features and to improve user's ability to integrate with our tools.",
-			"Answered user questions through JIRA and created help tickets to track fixes for future cases.",
-			"Created Swagger API documentation for over 100 endpoints.",
-			"Fixed more than 300 errors related to 508 usability compliance, making the web application usable for people with disabilities."
+			"Developed and maintained web applications using Java, AngularJS, JavaScript, MongoDB, and Maven in an Agile environment.",
+			"Enhanced UI/UX while ensuring compliance with Section 508 accessibility standards.",
+			"Designed and executed automated test suites (JUnit, Selenium) to validate functionality and release readiness.",
+			"Produced interactive Swagger documentation to support external system integration.",
+			"Managed source code with Git and tracked defects, enhancements, and tasks in JIRA.",
+			"Collaborated directly with customers to gather requirements and deliver new features and bug fixes.",
+			"Provided technical support to end users and developers, answering feature and integration questions via help desk channels.",
+			"Diagnosed and resolved user issues using internal backend tools, restoring functionality and minimizing downtime."
 		]
 	},
 	{
 		id: 3,
-		title: "Technical Writer III",
+		title: "Technical Writer III / Systems Engineer",
 		company: "Boeing Intelligence & Analytics (BI&A)",
 		period: "August 2018 - May 2021",
 		responsibilities: [
-			"Created, edited, modified, and compiled over 2,000 pages of tool documentation to give analysts a resource to refer to with questions on how a specific tool functions and the capabilities available within the tool.",
-			"Worked with multiple style-guides for each tool's documentation, maintaining a cohesive and consistent design.",
-			"Assisted users in chat, email, over the phone, and through JIRA ticketing helpdesk to quickly solve issues and get them back into the tools necessary to accomplish the mission.",
-			"Created documentation for frequently asked questions (FAQs) to give analysts a place to go prior to reaching out to the help desk.",
-			"Worked directly with developers to learn the latest features and functionalities of the tools to better assist customers.",
-			"Assisted in the creation and updating of learning materials to help train users how to take advantage of available features in the tool, ranging from basic introductions to advanced workflows.",
-			"Provided outreach support over social platforms to aid in increasing user base and spreading new information.",
-			"Tested new features before release to production, while reporting bugs and suggestions directly to developers.",
-			"Worked efficiently in an agile environment, meeting deadlines and sprint goals.",
-			"Assisted with proposal writings for multimillion-dollar contracts, focusing on grammar and style compliance."
+			"Authored and maintained 2,000+ pages of technical documentation in Confluence, covering system capabilities, procedures, and troubleshooting.",
+			"Partnered with developers to document new features, workflows, and operational guidance.",
+			"Produced training materials ranging from introductory guides to advanced user workflows.",
+			"Tested pre-release features, validated functionality, and reported defects to engineering teams.",
+			"Provided Tier 1–2 technical support via chat, email, and phone, resolving user issues with internal backend tools.",
+			"Managed user requests and incidents by creating and tracking tickets in JIRA, including bug reports and feature requests.",
+			"Supported proposal development for multimillion-dollar contracts, ensuring grammar, style, and compliance requirements."
 		]
 	},
 	{
@@ -83,7 +84,7 @@ const Experience = () => {
 	useEffect(() => {
 		jobs.forEach((_, index) => {
 			setTimeout(() => {
-				setVisibleJobs(prev => [...prev, index]);
+				setVisibleJobs((prev: number[]) => [...prev, index]);
 			}, index * 150); // 150ms delay between each job
 		});
 	}, []);
@@ -102,7 +103,7 @@ const Experience = () => {
 				{/* Resume Button Section */}
 				<div className="text-center mb-8 pb-6 border-b border-gray-600">
 					<button
-						onClick={() => openPDF(ResumePDF, "Nicholas Platt Resume 2025")}
+						onClick={() => openPDF(ResumePDF, "Nicholas Platt Resume 2026")}
 						className="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105 transform-gpu"
 					>
 						📄 View Resume
