@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
 import PDFViewer from "./PDFViewer";
 import ResumePDF from "../assets/pdfs/platt_resume_2026_cleared.pdf";
+import { useStaggeredEntrance } from "../hooks/useStaggeredEntrance";
+import { usePDFViewer } from "../hooks/usePDFViewer";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 interface Job {
 	id: number;
@@ -24,8 +26,8 @@ const jobs: Job[] = [
 			"Diagnosed and resolved defects through root-cause analysis and debugging, improving system stability and maintainability.",
 			"Managed source control across GitHub and GitLab, performing code reviews and merging pull requests.",
 			"Implemented documentation-as-code practices and maintained developer/user documentation and architecture diagrams using Sphinx, LaTeX, and Markdown.",
-			"Delivered technical briefings and live demonstrations to senior leadership on new features and system capabilities."
-		]
+			"Delivered technical briefings and live demonstrations to senior leadership on new features and system capabilities.",
+		],
 	},
 	{
 		id: 2,
@@ -40,8 +42,8 @@ const jobs: Job[] = [
 			"Managed source code with Git and tracked defects, enhancements, and tasks in JIRA.",
 			"Collaborated directly with customers to gather requirements and deliver new features and bug fixes.",
 			"Provided technical support to end users and developers, answering feature and integration questions via help desk channels.",
-			"Diagnosed and resolved user issues using internal backend tools, restoring functionality and minimizing downtime."
-		]
+			"Diagnosed and resolved user issues using internal backend tools, restoring functionality and minimizing downtime.",
+		],
 	},
 	{
 		id: 3,
@@ -55,8 +57,8 @@ const jobs: Job[] = [
 			"Tested pre-release features, validated functionality, and reported defects to engineering teams.",
 			"Provided Tier 1–2 technical support via chat, email, and phone, resolving user issues with internal backend tools.",
 			"Managed user requests and incidents by creating and tracking tickets in JIRA, including bug reports and feature requests.",
-			"Supported proposal development for multimillion-dollar contracts, ensuring grammar, style, and compliance requirements."
-		]
+			"Supported proposal development for multimillion-dollar contracts, ensuring grammar, style, and compliance requirements.",
+		],
 	},
 	{
 		id: 4,
@@ -71,82 +73,55 @@ const jobs: Job[] = [
 			"Worked closely with customers, tailoring reports to meet their standards and requirements.",
 			"Completed and collaborated on over 200 serialized reports, utilizing multiple secure databases and tools while maintaining 100% compliance.",
 			"Enforced Quality Control (QC) on over 200 serialized reports to ensure all reporting contains reliable and accurate intelligence.",
-			"Worked directly with many outside organizations in the Intelligence Community (IC), maintaining constant open contact and facilitating work to their needs/requests."
-		]
-	}
+			"Worked directly with many outside organizations in the Intelligence Community (IC), maintaining constant open contact and facilitating work to their needs/requests.",
+		],
+	},
 ];
 
 const Experience = () => {
-	const [visibleJobs, setVisibleJobs] = useState<number[]>([]);
-	const [selectedPDF, setSelectedPDF] = useState<{ url: string; title: string } | null>(null);
-
-	// Stagger job animations
-	useEffect(() => {
-		jobs.forEach((_, index) => {
-			setTimeout(() => {
-				setVisibleJobs((prev: number[]) => [...prev, index]);
-			}, index * 150); // 150ms delay between each job
-		});
-	}, []);
-
-	const openPDF = (url: string, title: string) => {
-		setSelectedPDF({ url, title });
-	};
-
-	const closePDF = () => {
-		setSelectedPDF(null);
-	};
+	const visibleJobs = useStaggeredEntrance(jobs.length, 150);
+	const { selectedPDF, openPDF, closePDF } = usePDFViewer();
 
 	return (
 		<>
-			<div className="text-white text-left mx-auto max-w-4xl">
-				{/* Resume Button Section */}
+			<div className="text-base-content text-left mx-auto max-w-4xl">
 				<div className="text-center mb-8 pb-6 border-b border-gray-600">
 					<button
 						onClick={() => openPDF(ResumePDF, "Nicholas Platt Resume 2026")}
-						className="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105 transform-gpu"
+						className="btn btn-outline hover:scale-105 transition-all duration-300 ease-out"
 					>
 						📄 View Resume
 					</button>
 				</div>
 
-				{/* Jobs List */}
 				{jobs.map((job, index) => (
-					<div 
+					<div
 						key={job.id}
 						className={`pb-5 transition-all duration-500 ease-out ${
-							visibleJobs.includes(index) 
-								? 'opacity-100 translate-y-0' 
-								: 'opacity-0 translate-y-4'
+							visibleJobs.includes(index)
+								? "opacity-100 translate-y-0"
+								: "opacity-0 translate-y-4"
 						}`}
 					>
 						<div className="flex justify-between text-2xl font-bold">
-							{job.title}{" "}
+							{job.title}
 							<span className="text-right text-lg font-normal">{job.period}</span>
 						</div>
 						<div className="text-xl">{job.company}</div>
 						<ul className="list-disc pl-6 pt-3">
-							{job.responsibilities.map((responsibility, respIndex) => (
-								<li key={respIndex}>{responsibility}</li>
+							{job.responsibilities.map((responsibility, i) => (
+								<li key={i}>{responsibility}</li>
 							))}
 						</ul>
 					</div>
 				))}
-				
-				<div className="pb-5 flex">
-					<button
-						onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-						className="btn btn-sm sm:btn-sm md:btn-md lg:btn-lg mx-auto bg-atom2 hover:bg-atom1 transition-colors duration-200"
-					>
-						To Top
-					</button>
-				</div>
+
+				<ScrollToTopButton />
 			</div>
 
-			{/* PDF Viewer - Rendered at root level for proper positioning */}
 			{selectedPDF && (
 				<PDFViewer
-					isOpen={!!selectedPDF}
+					isOpen
 					onClose={closePDF}
 					pdfUrl={selectedPDF.url}
 					title={selectedPDF.title}

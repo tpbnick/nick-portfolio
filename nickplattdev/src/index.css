@@ -1,28 +1,80 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@import "react-toastify/dist/ReactToastify.css";
+
+@plugin "daisyui" {
+  themes: nord;
+}
+
+/* Custom dark Nord theme
+   Polar Night oklch values: nord0/nord3 confirmed exact from DaisyUI Nord light theme;
+   nord1/nord2 computed from sRGB hex via Oklab. All Frost values confirmed exact.
+   Aurora values computed from sRGB hex via Oklab. */
+[data-theme="nord-dark"] {
+  color-scheme: dark;
+
+  /* Polar Night backgrounds (elevation model: page bg darkest, surfaces lighten) */
+  --color-base-100: oklch(29.2% 0.014 262.1);        /* #282c33 — custom dark bg */
+  --color-base-200: oklch(37.9% 0.029 266.3);        /* nord1 #3b4252 — computed */
+  --color-base-300: oklch(41.6% 0.032 264.5);        /* nord2 #434c5e — computed */
+
+  /* Snow Storm — confirmed exact from DaisyUI Nord light */
+  --color-base-content: oklch(95.127% 0.007 260.731);  /* nord6 #eceff4 */
+
+  /* Frost — confirmed exact from DaisyUI Nord light */
+  --color-primary: oklch(59.435% 0.077 254.027);         /* nord10 #5e81ac */
+  --color-primary-content: oklch(95.127% 0.007 260.731);
+  --color-secondary: oklch(69.651% 0.059 248.687);       /* nord9  #81a1c1 */
+  --color-secondary-content: oklch(95.127% 0.007 260.731);
+  --color-accent: oklch(77.464% 0.062 217.469);           /* nord8  #88c0d0 */
+  --color-accent-content: oklch(32.437% 0.022 264.182);  /* dark text on light teal */
+
+  /* nord3 — confirmed exact from DaisyUI Nord light neutral */
+  --color-neutral: oklch(45.229% 0.035 264.131);          /* nord3 #4c566a */
+  --color-neutral-content: oklch(89.925% 0.016 262.749);  /* nord4 #d8dee9 */
+
+  /* Aurora semantic colors — computed from hex */
+  --color-info: oklch(77.464% 0.062 217.469);            /* nord8  #88c0d0 */
+  --color-info-content: oklch(32.437% 0.022 264.182);
+  --color-success: oklch(76.8% 0.075 131.1);             /* nord14 #a3be8c */
+  --color-success-content: oklch(32.437% 0.022 264.182);
+  --color-warning: oklch(85.5% 0.089 84.4);              /* nord13 #ebcb8b */
+  --color-warning-content: oklch(32.437% 0.022 264.182);
+  --color-error: oklch(60.6% 0.120 15.4);                /* nord11 #bf616a */
+  --color-error-content: oklch(95.127% 0.007 260.731);
+
+  /* Match Nord's radius/border style */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-atom1: #40444f;
+  --color-atom2: #4e5466;
+}
 
 :root {
-	background-color: #282c34;
-
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-text-size-adjust: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 @keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .fade-in {
-	animation: fade-in 2s ease;
-	transform: translate3d(0, 0, 0);
-	backface-visibility: hidden;
+  animation: fade-in 2s ease;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }

@@ -9,52 +9,32 @@ interface PDFViewerProps {
 }
 
 const PDFViewer = ({ isOpen, onClose, pdfUrl, title }: PDFViewerProps) => {
-	const [mounted, setMounted] = useState(false);
-	const [shouldRender, setShouldRender] = useState(false);
-	const [isClosing, setIsClosing] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {
-		if (isOpen && !isClosing) {
-			// Mount the component
-			setMounted(true);
-			// Small delay to ensure DOM is ready, then show
-			setTimeout(() => setShouldRender(true), 10);
-		}
-	}, [isOpen, isClosing]);
+		if (!isOpen) return;
+		const timer = setTimeout(() => setIsVisible(true), 10);
+		return () => clearTimeout(timer);
+	}, [isOpen]);
 
 	const handleClose = () => {
-		// Start the close animation
-		setIsClosing(true);
-		setShouldRender(false);
-		
-		// Wait for fade out animation to complete, then call onClose
-		setTimeout(() => {
-			setIsClosing(false);
-			setMounted(false);
-			onClose();
-		}, 200);
+		setIsVisible(false);
+		setTimeout(onClose, 200);
 	};
 
 	const handleBackdropClick = (e: React.MouseEvent) => {
-		// Only close if clicking the backdrop, not the modal content
-		if (e.target === e.currentTarget) {
-			handleClose();
-		}
+		if (e.target === e.currentTarget) handleClose();
 	};
 
-	if (!mounted) return null;
-
-	// Use portal to render at root level for proper positioning
 	return createPortal(
-		<div 
-			className={`fixed inset-0 flex items-center justify-center z-50 p-4 transition-all duration-200 ease-in-out ${
-				shouldRender ? 'opacity-100' : 'opacity-0'
-			}`} 
-			style={{ backgroundColor: '#282c34' }}
+		<div
+			className={`fixed inset-0 flex items-center justify-center z-50 p-4 bg-black/75 transition-all duration-200 ease-in-out ${
+				isVisible ? "opacity-100" : "opacity-0"
+			}`}
 			onClick={handleBackdropClick}
 		>
-			<div className={`bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col transition-all duration-200 ease-in-out transform ${
-				shouldRender ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
+			<div className={`bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col transition-all duration-200 ease-in-out ${
+				isVisible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
 			}`}>
 				<div className="flex justify-between items-center p-4">
 					<h3 className="text-lg font-semibold text-gray-800">{title}</h3>
@@ -79,4 +59,4 @@ const PDFViewer = ({ isOpen, onClose, pdfUrl, title }: PDFViewerProps) => {
 	);
 };
 
-export default PDFViewer; 
+export default PDFViewer;

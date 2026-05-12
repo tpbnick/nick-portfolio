@@ -1,5 +1,7 @@
+import { SOCIAL_LINKS } from "../constants";
+
 const Skills = () => (
-	<div className="text-white mx-auto max-w-4xl">
+	<div className="text-base-content mx-auto max-w-4xl">
 		<div className="pb-4">
 			<p className="pb-3">
 				Over the past few years, starting in late 2018, I have dedicated myself to
@@ -14,9 +16,10 @@ const Skills = () => (
 			<p className="pb-8">
 				I began taking notes and decided to create a{" "}
 				<a
-					href="https://docs.nickplatt.dev"
+					href={SOCIAL_LINKS.docs}
 					target="_blank"
-					className="text-blue-300 hover:text-blue-500"
+					rel="noopener noreferrer"
+					className="text-primary hover:text-primary/70"
 				>
 					documentation website
 				</a>{" "}
@@ -27,7 +30,8 @@ const Skills = () => (
 				<a
 					href="https://soccerfront.io"
 					target="_blank"
-					className="text-blue-300 hover:text-blue-500"
+					rel="noopener noreferrer"
+					className="text-primary hover:text-primary/70"
 				>
 					SoccerFront.io
 				</a>
@@ -37,7 +41,8 @@ const Skills = () => (
 				<a
 					href="https://triviadart.com"
 					target="_blank"
-					className="text-blue-300 hover:text-blue-500"
+					rel="noopener noreferrer"
+					className="text-primary hover:text-primary/70"
 				>
 					TriviaDart
 				</a>

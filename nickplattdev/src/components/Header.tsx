@@ -2,29 +2,26 @@ import { useEffect, useState } from "react";
 import NickAtom from "../assets/atom.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { CONTACT } from "../constants";
+import { TIMING, ANIMATION_CLASS } from "../constants/animations";
 
 interface HeaderProps {
 	isVisible: boolean;
-	isTransitioning: boolean;
 }
 
 const Header = ({ isVisible }: HeaderProps) => {
-	const [isEntranceVisible, setIsEntranceVisible] = useState<boolean>(false);
+	const [isEntranceVisible, setIsEntranceVisible] = useState(false);
 
-	// Entrance animation delay
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			setIsEntranceVisible(true);
-		}, 100);
-		
+		const timer = setTimeout(() => setIsEntranceVisible(true), TIMING.FAST);
 		return () => clearTimeout(timer);
 	}, []);
 
 	return (
 		<header className={`w-90 mx-auto sm:w-full md:w-4/5 lg:w-3/4 xl:w-2/3 pt-3 transition-all duration-700 ease-out ${
-			isEntranceVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+			isEntranceVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
 		}`}>
-			<a href={window.location.href} aria-label="Return to top of page">
+			<a href="/" aria-label="Return to top of page">
 				<img
 					src={NickAtom}
 					className="mx-auto fade-in duration-300 transform-gpu hover:scale-110 transition-all duration-300"
@@ -34,38 +31,38 @@ const Header = ({ isVisible }: HeaderProps) => {
 					alt="Nicholas Platt Logo"
 				/>
 			</a>
-			<h1 className="text-white text-2xl pt-5 pb-2">Nicholas Platt</h1>
-			<p className="text-white text-l pb-2">
-				Rancho Cucamonga, CA · (909) 293-8750 ·{" "}
+			<h1 className="text-base-content text-2xl pt-5 pb-2">{CONTACT.name}</h1>
+			<p className="text-base-content text-l pb-2">
+				{CONTACT.location} · {CONTACT.phone} ·{" "}
 				<a
-					href="mailto:nick@nickplatt.dev"
-					className="text-white hover:text-blue-500 transition-colors duration-200"
-					aria-label="Send email to nick@nickplatt.dev"
+					href={`mailto:${CONTACT.email}`}
+					className="text-base-content hover:text-primary transition-colors duration-200"
+					aria-label={`Send email to ${CONTACT.email}`}
 				>
-					nick@nickplatt.dev
+					{CONTACT.email}
 				</a>
 			</p>
 			<div className="flex justify-center pb-2">
 				<a
-					href="https://github.com/tpbnick"
+					href={CONTACT.github.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-white hover:text-blue-500 transition-colors duration-200 hover:scale-110 transform-gpu"
+					className="text-base-content hover:text-primary transition-colors duration-200 hover:scale-110 transform-gpu"
 					aria-label="Visit Nick's GitHub profile (opens in new tab)"
 				>
-					<FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
+					<FontAwesomeIcon icon={faGithub} style={{ fontSize: "2rem" }} />
 				</a>
 			</div>
 			<div className={`header-bio-transition ${
-				isVisible ? 'header-bio-visible' : 'header-bio-hidden'
+				isVisible ? "header-bio-visible" : "header-bio-hidden"
 			}`}>
-				<p className="text-white text-l text-center">
+				<p className="text-base-content text-l text-center">
 					Hello! I am currently a software engineer with{" "}
 					<a
 						href="https://eriasventures.com/"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-blue-300 hover:text-blue-500 transition-colors duration-200"
+						className="text-primary hover:text-primary/70 transition-colors duration-200"
 						aria-label="Visit Erias Ventures website (opens in new tab)"
 					>
 						Erias Ventures
@@ -76,7 +73,7 @@ const Header = ({ isVisible }: HeaderProps) => {
 					Analyst! I received my Bachelor's degree in Computer Networking and
 					Cybersecurity in 2020 and my Master's in Software Engineering in 2023, both
 					from the University of Maryland. I enjoy frontend development, especially
-					working with TypeScript and web application frameworks like React. If you have 
+					working with TypeScript and web application frameworks like React. If you have
 					any questions, please ask!
 				</p>
 			</div>
@@ -84,4 +81,4 @@ const Header = ({ isVisible }: HeaderProps) => {
 	);
 };
 
-export default Header; 
+export default Header;

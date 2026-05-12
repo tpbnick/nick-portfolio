@@ -1,6 +1,5 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import { toast } from "react-toastify";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -20,84 +19,62 @@ interface IErrors {
 	message?: string;
 }
 
-const Contact: React.FC = () => {
-	const [formData, setFormData] = useState<IForm>({
-		name: "",
-		email: "",
-		message: "",
-	});
+const encode = (data: IFormData): string =>
+	Object.keys(data)
+		.map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key as keyof IFormData])}`)
+		.join("&");
 
-	const handleChange = (
-		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		const { name, value } = e.target;
-		setFormData({
-			...formData,
-			[name]: value,
-		});
-	};
+const validate = (formData: IForm): IErrors => {
+	const formErrors: IErrors = {};
+	if (!formData.name) formErrors.name = "Name required";
+	if (!formData.email) formErrors.email = "Email required";
+	if (!formData.message) formErrors.message = "Message is required";
+	return formErrors;
+};
 
+const Contact = () => {
+	const [formData, setFormData] = useState<IForm>({ name: "", email: "", message: "" });
 	const [errors, setErrors] = useState<IErrors>({});
-	const validate = (formData: IForm): IErrors => {
-		const formErrors: IErrors = {};
-		if (!formData.name) {
-			formErrors.name = "Name required";
-		}
-		if (!formData.email) {
-			formErrors.email = "Email required";
-		}
-		if (!formData.message) {
-			formErrors.message = "Message is required";
-		}
-		return formErrors;
-	};
 
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		setFormData(prev => ({ ...prev, [name]: value }));
+	}, []);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		setErrors(validate(formData));
-		setIsSubmitted(true);
-	};
+		const validationErrors = validate(formData);
+		setErrors(validationErrors);
+		if (Object.keys(validationErrors).length > 0) return;
 
-	const encode = (data: IFormData): string => {
-		return Object.keys(data)
-			.map(
-				(key) =>
-					encodeURIComponent(key) +
-					"=" +
-					encodeURIComponent(data[key as keyof IFormData])
-			)
-			.join("&");
-	};
-
-	useEffect(() => {
-		if (Object.keys(errors).length === 0 && isSubmitted) {
-			const data: IFormData = { "form-name": "contact-form", ...formData };
-			fetch("/", {
-				method: "POST",
-				headers: { "Content-Type": "application/x-www-form-urlencoded" },
-				body: encode(data),
+		const data: IFormData = { "form-name": "contact-form", ...formData };
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: encode(data),
+		})
+			.then(() => {
+				toast.success("Message sent successfully!", {
+					position: "bottom-center",
+					theme: "colored",
+					autoClose: 5000,
+					pauseOnHover: true,
+					closeOnClick: true,
+				});
+				setFormData({ name: "", email: "", message: "" });
+				setErrors({});
 			})
-				.then(() => {
-					toast.success("Message Sent!", {
-						position: "bottom-center",
-						theme: "colored",
-						autoClose: 5000,
-						pauseOnHover: true,
-						closeOnClick: true,
-					});
-					setIsSubmitted(false);
-					setFormData({ name: "", email: "", message: "" });
-				})
-				.catch((error) => toast.error(`Message Failure \n${error.toString()}`));
-		}
-	}, [errors, formData, isSubmitted]);
+			.catch(() => {
+				toast.error("Failed to send message. Please try again or contact me directly.", {
+					position: "bottom-center",
+					theme: "dark",
+					autoClose: 7000,
+				});
+			});
+	};
 
 	return (
-		<div>
-			<ToastContainer />
-			<div className="flex justify-center items-center">
+		<div className="flex justify-center items-center">
 				<div className="flex flex-col items-center xl:w-1/2 sm:w-full">
 					<form
 						onSubmit={handleSubmit}
@@ -106,7 +83,7 @@ const Contact: React.FC = () => {
 					>
 						<input type="hidden" name="form-name" value="contact" />
 						<div className="form-inputs w-full">
-							<label className="text-white block text-xl text-left">
+							<label className="text-base-content block text-xl text-left">
 								Full Name:
 								<input
 									type="text"
@@ -121,7 +98,7 @@ const Contact: React.FC = () => {
 							{errors.name && <p>{errors.name}</p>}
 						</div>
 						<div className="form-inputs w-full">
-							<label className="text-white block text-xl text-left">
+							<label className="text-base-content block text-xl text-left">
 								Email Address:
 								<input
 									type="email"
@@ -136,7 +113,7 @@ const Contact: React.FC = () => {
 							{errors.email && <p>{errors.email}</p>}
 						</div>
 						<div className="form-inputs w-full">
-							<label className="text-white block text-xl text-left">
+							<label className="text-base-content block text-xl text-left">
 								Message:
 								<textarea
 									name="message"
@@ -160,7 +137,6 @@ const Contact: React.FC = () => {
 						</div>
 					</form>
 				</div>
-			</div>
 		</div>
 	);
 };
