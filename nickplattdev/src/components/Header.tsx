@@ -3,7 +3,7 @@ import NickAtom from "../assets/atom.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { CONTACT } from "../constants";
-import { TIMING, ANIMATION_CLASS } from "../constants/animations";
+import { TIMING } from "../constants/animations";
 
 interface HeaderProps {
 	isVisible: boolean;
